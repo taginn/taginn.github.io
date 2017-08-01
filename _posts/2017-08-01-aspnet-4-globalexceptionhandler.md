@@ -2,6 +2,8 @@
 
 ## Global Exception Handler ##
 
+Created to catch any unhandled exceptions thrown by ASP.NET.
+
 ```
 public class GlobalExceptionHandler : ExceptionHandler
 {
@@ -34,6 +36,27 @@ public class GlobalExceptionHandler : ExceptionHandler
 }
 ```
 
+Related BadRequestResult
+
+```
+    public class BadRequestResult : IHttpActionResult
+    {
+        private HttpRequestMessage _request;
+        private HttpResponseMessage _httpResponseMessage;
+
+        public BadRequestResult(HttpRequestMessage request, HttpResponseMessage httpResponseMessage)
+        {
+            _request = request;
+            _httpResponseMessage = httpResponseMessage;
+        }
+
+        public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+        {
+            return Task.FromResult(_httpResponseMessage);
+        }
+    }
+
+```
 
 Add this to the WebApiConfig:
 
