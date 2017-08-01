@@ -3,7 +3,7 @@
 
 Created to catch any unhandled exceptions thrown by ASP.NET.
 
-```
+```csharp 
 public class GlobalExceptionHandler : ExceptionHandler
 {
     protected static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler : ExceptionHandler
 
 Related BadRequestResult:
 
-```
+```csharp 
 public class BadRequestResult : IHttpActionResult
 {
     private HttpRequestMessage _request;
@@ -59,7 +59,7 @@ public class BadRequestResult : IHttpActionResult
 
 Add this to the WebApiConfig:
 
-```
+```csharp 
 public static class WebApiConfig
 {
 

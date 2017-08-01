@@ -3,7 +3,7 @@
 
 Add a filter to validate the model state for any action.
 
-```
+```csharp 
 public class ValidationActionFilter : ActionFilterAttribute
 {
     public override void OnActionExecuting(HttpActionContext actionContext)
@@ -32,7 +32,7 @@ public class ValidationActionFilter : ActionFilterAttribute
 
 Add this to the WebApiConfig:
 
-```
+```csharp 
 public static class WebApiConfig
 {
 

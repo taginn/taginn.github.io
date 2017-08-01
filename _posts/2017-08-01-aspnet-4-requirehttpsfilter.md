@@ -3,7 +3,7 @@
 
 Add a filter to require HTTPS  - but not in development.
 
-```
+```csharp 
 public class RequireHttpsFilter : IAuthenticationFilter
 {
     public bool AllowMultiple
@@ -32,7 +32,7 @@ public class RequireHttpsFilter : IAuthenticationFilter
 
 Add this to the WebApiConfig:
 
-```
+```csharp 
 public static class WebApiConfig
 {
 
@@ -55,7 +55,7 @@ public static class WebApiConfig
 
 OwinConfig.ConfigAuth:
 
-```
+```csharp 
 public class OwinConfig
 {
     private const string keyAccessTokenExpireMinutes = "accessTokenExpireMinutes";
