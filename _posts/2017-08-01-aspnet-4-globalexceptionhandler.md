@@ -1,5 +1,4 @@
 
-
 ## Global Exception Handler ##
 
 Created to catch any unhandled exceptions thrown by ASP.NET.
@@ -36,41 +35,41 @@ public class GlobalExceptionHandler : ExceptionHandler
 }
 ```
 
-Related BadRequestResult
+Related BadRequestResult:
 
 ```
-    public class BadRequestResult : IHttpActionResult
+public class BadRequestResult : IHttpActionResult
+{
+    private HttpRequestMessage _request;
+    private HttpResponseMessage _httpResponseMessage;
+
+    public BadRequestResult(HttpRequestMessage request, HttpResponseMessage httpResponseMessage)
     {
-        private HttpRequestMessage _request;
-        private HttpResponseMessage _httpResponseMessage;
-
-        public BadRequestResult(HttpRequestMessage request, HttpResponseMessage httpResponseMessage)
-        {
-            _request = request;
-            _httpResponseMessage = httpResponseMessage;
-        }
-
-        public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
-        {
-            return Task.FromResult(_httpResponseMessage);
-        }
+        _request = request;
+        _httpResponseMessage = httpResponseMessage;
     }
+
+    public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+    {
+        return Task.FromResult(_httpResponseMessage);
+    }
+}
 
 ```
 
 Add this to the WebApiConfig:
 
 ```
-    public static class WebApiConfig
+public static class WebApiConfig
+{
+
+    public static void Register(HttpConfiguration config)
     {
 
-        public static void Register(HttpConfiguration config)
-        {
+        // Standard configuration code here...
 
-            // Standard configuration code here...
+        config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
-            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
-
-        }
     }
+}
 ```
